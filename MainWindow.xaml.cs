@@ -118,8 +118,8 @@ namespace Diplom
         private void InitiateFTPClient()
         {
             ftpClient.Host = @"ftp://127.0.0.1/";
-            ftpClient.UserName = "SAMP";
-            ftpClient.Password = "sasha10asd";
+            ftpClient.UserName = "";
+            ftpClient.Password = "";
         }
 
         private void RefreshEmployersList()
