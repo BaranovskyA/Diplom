@@ -1,0 +1,428 @@
+﻿<Window x:Class="Diplom.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="1200"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown">
+    <Window.Resources>
+        <ResourceDictionary Source="Resources.xaml" />
+    </Window.Resources>
+    <Grid>
+
+        <!-- Фон меню -->
+
+        <Rectangle Name="rMenu" Margin="1,1,937,1" Grid.RowSpan="2">
+            <Rectangle.Fill>
+                <LinearGradientBrush>
+                    <GradientStop Color="#21025b" Offset="0" />
+                    <GradientStop Color="#09198e" Offset="1" />
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+
+        <!-- Фон контента -->
+
+        <Rectangle Name="rContent" Margin="265,1,1,1" Grid.RowSpan="2">
+            <Rectangle.Fill>
+                <LinearGradientBrush>
+                    <GradientStop Color="#1a0a79" Offset="0.9" />
+                    <GradientStop Color="#081c57" Offset="0" />
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+
+        <!-- Название программы -->
+
+        <Label FontFamily="./Fonts/#Fulbo Argenta" Foreground="White" FontSize="40" HorizontalAlignment="Center" FontWeight="Bold" Margin="28,0,968,551">WORKLIST</Label>
+
+        <TextBlock Name="tbNeedAuhInf" Visibility="Visible" Margin="17,252,952,209" Background="Transparent" TextWrapping="Wrap" TextAlignment="Center"
+               Foreground="White" FontSize="20" FontFamily="./Fonts/#Fulbo Argenta">
+            Для пользования функционалом программы сначала следует авторизоваться
+        </TextBlock>
+
+        <Label Name="lNeedAuthInf" Visibility="Visible" Margin="10,242,945,209" BorderBrush="White" BorderThickness="3" />
+
+
+        <Button Name="bEmployers" Visibility="Hidden" Background="Transparent" BorderThickness="0" Margin="11,84,943,471" Click="bEmployers_Click" Style="{DynamicResource ButtonStyleWithClick}">
+            <Label FontFamily="./Fonts/#Fulbo Argenta" Foreground="White" FontSize="20" FontWeight="Bold" Width="128">Работники</Label>
+        </Button>
+
+        <Image Name="imageEmployers" Visibility="Hidden" Source="./Images/emp-card.png" Margin="13,85,1135,473"/>
+
+        <Button Name="bTasks" Visibility="Hidden" Background="Transparent" BorderThickness="0" Margin="11,132,943,426"  Style="{DynamicResource ButtonStyleWithClick}" Click="bTasks_Click">
+            <Label FontFamily="./Fonts/#Fulbo Argenta" Foreground="White" FontSize="20" FontWeight="Bold" Width="128">Задания</Label>
+        </Button>
+
+        <Image Name="imageTasks" Visibility="Hidden" Source="./Images/task_icon.png" Margin="13,132,1135,426"/>
+
+        <!--Чат-->
+
+        <TextBox Name="tbChat" Visibility="Hidden" HorizontalAlignment="Left" Height="323" Margin="10,179,0,0" TextWrapping="Wrap" 
+                 VerticalAlignment="Top" Width="245" IsReadOnly="True" VerticalScrollBarVisibility="Auto"/>
+
+        <TextBox Name="tbSend" Visibility="Hidden" HorizontalAlignment="Left" Height="24" Margin="10,503,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="186"/>
+
+        <Button Name="bSend" Visibility="Hidden" Content="Send" HorizontalAlignment="Left" Margin="196,503,0,0" VerticalAlignment="Top" Width="59" Height="25" Click="bSend_Click"/>
+
+        <Button Name="bMyProfile" Visibility="Hidden" Background="Transparent" BorderThickness="0" Margin="13,548,943,10"  Style="{DynamicResource ButtonStyleWithClick}" Click="bMyProfile_Click">
+            <Label FontFamily="./Fonts/#Fulbo Argenta" Foreground="White" FontSize="20" FontWeight="Bold" Width="236" HorizontalContentAlignment="Center">Мой Профиль</Label>
+        </Button>
+
+        <!-- Кнопки авторизации, приветствие и LogOut -->
+
+        <Button Name="bAuthorized" Background="Transparent" Visibility="Visible" BorderThickness="0" FontSize="20" FontFamily="./Fonts/#Fulbo Argenta"
+                Foreground="White" Margin="951,5,80,551" Style="{DynamicResource ButtonStyleWithClick}" Click="bAuthorized_Click">Авторизация</Button>
+
+        <Button Name="bLogOut" Background="Transparent" Visibility="Hidden" BorderThickness="0" FontSize="20" FontFamily="./Fonts/#Fulbo Argenta"
+                Foreground="White" Margin="1017,5,80,551" Style="{DynamicResource ButtonStyleWithClick}" Click="bLogOut_Click">Выйти</Button>
+
+        <Label Name="lGreeting" Visibility="Hidden" FontFamily="./Fonts/#Fulbo Argenta" Foreground="White" FontSize="24" HorizontalAlignment="Left" 
+               HorizontalContentAlignment="Left" FontWeight="Bold" Margin="288,7,0,555" Width="709">Приветствуем,</Label>
+
+        <!-- Кнопка закрытия с крестиком -->
+
+        <Ellipse Fill="Red" Width="33" Height="33" Margin="1157,10,10,557"/>
+
+        <Button Name="bClose" Background="Transparent" BorderThickness="0" Margin="1161,15,14,562" Style="{DynamicResource ButtonStyleNoClick}" Click="bClose_Click">
+            <Path Data="M7.1999998,0L16,8.7999997 24.799999,0 32,7.1999998 23.2,16 32,24.799999 24.799999,32 16,23.2 7.1999998,32 0,24.799999 8.7999997,16 0,7.1999998z" 
+                                     Stretch="Uniform" 
+                                     Fill="White" 
+                                     Width="15" Height="15" Margin="0,0,0,0" RenderTransformOrigin="1.212,0.312"/>
+        </Button>
+
+        <!-- Отображение работников -->
+
+        <Button Name="bShowEmp" Visibility="Hidden" Background="Transparent" BorderThickness="0" FontSize="20" FontFamily="./Fonts/#Fulbo Argenta"
+                Foreground="White" Margin="306,83,778,476" Style="{DynamicResource ButtonStyleWithClick}" Click="bShowEmp_Click">Просмотр</Button>
+
+        <DataGrid x:Name="gEmployers" Visibility="Hidden" Margin="288,129,14,62" Grid.RowSpan="2" IsReadOnly="True" CanUserResizeColumns="False" 
+                  CanUserResizeRows="False" VerticalScrollBarVisibility="Visible" HeadersVisibility="Column" SelectionChanged="gEmployers_SelectionChanged"></DataGrid>
+
+        <Button Name="bShowEmpDetails" Visibility="Hidden" Background="Transparent" BorderThickness="0" FontSize="20" FontFamily="./Fonts/#Fulbo Argenta"
+                Foreground="White" Margin="288,543,795,10" Style="{DynamicResource ButtonStyleWithClick}" Click="bShowEmpDetails_Click">Подробнее</Button>
+
+        <Button Name="bShowEmpDelete" Visibility="Hidden" Background="Transparent" BorderThickness="0" FontSize="20" FontFamily="./Fonts/#Fulbo Argenta"
+                Foreground="White" Margin="460,543,623,10" Style="{DynamicResource ButtonStyleWithClick}" Click="bShowEmpDelete_Click">Удалить</Button>
+
+
+        <!-- Начало блока добавления работника -->
+
+        <Button Name="bAddEmp" Visibility="Hidden"  Background="Transparent" BorderThickness="0" FontSize="20" FontFamily="./Fonts/#Fulbo Argenta"
+                Foreground="White" Margin="486,83,545,476" Style="{DynamicResource ButtonStyleWithClick}" Click="bAddEmp_Click">Добавление</Button>
+
+        <Label Name="lAddEmpFIO" Visibility="Hidden" FontFamily="./Fonts/#Fulbo Argenta" Foreground="White" FontSize="24" HorizontalAlignment="Left" 
+               HorizontalContentAlignment="Center" FontWeight="Bold" Margin="288,142,0,420" Width="311">*ФИО</Label>
+
+        <TextBox Name="tbAddEmpFIO" Visibility="Hidden" FontFamily="./Fonts/#pakenham" FontWeight="Medium" Background="Transparent" BorderBrush="White"
+                 Foreground="White" FontSize="16" Margin="288,180,601,381" VerticalContentAlignment="Center"/>
+
+        <Label Name="lAddEmpAge" Visibility="Hidden" FontFamily="./Fonts/#Fulbo Argenta" Foreground="White" FontSize="24" HorizontalAlignment="Left" 
+               HorizontalContentAlignment="Center" FontWeight="Bold" Margin="288,235,0,326" Width="311">*Возраст</Label>
+
+        <TextBox Name="tbAddEmpAge" Visibility="Hidden" FontFamily="./Fonts/#pakenham" FontWeight="Medium" Background="Transparent" BorderBrush="White"
+                 Foreground="White" FontSize="16" Margin="287,274,601,287" VerticalContentAlignment="Center" />
+
+        <Label Name="lAddEmpEmail" Visibility="Hidden" FontFamily="./Fonts/#Fulbo Argenta" Foreground="White" FontSize="24" HorizontalAlignment="Left" 
+               HorizontalContentAlignment="Center" FontWeight="Bold" Margin="288,344,0,222" Width="311">Email</Label>
+
+        <TextBox Name="tbAddEmpEmail" Visibility="Hidden" FontFamily="./Fonts/#pakenham" FontWeight="Medium" Background="Transparent" BorderBrush="White"
+                 Foreground="White" FontSize="16" Margin="287,384,601,177" VerticalContentAlignment="Center"/>
+
+        <Label Name="lAddEmpUsername" Visibility="Hidden" FontFamily="./Fonts/#Fulbo Argenta" Foreground="White" FontSize="24" HorizontalAlignment="Left" 
+               HorizontalContentAlignment="Center" FontWeight="Bold" Margin="778,142,0,420" Width="312">*Имя пользователя</Label>
+
+        <TextBox Name="tbAddEmpUsername" Visibility="Hidden" FontFamily="./Fonts/#pakenham" FontWeight="Medium" Background="Transparent" BorderBrush="White"
+                 Foreground="White" FontSize="16" Margin="778,180,110,381" VerticalContentAlignment="Center"/>
+
+        <Label Name="lAddEmpPassword" Visibility="Hidden" FontFamily="./Fonts/#Fulbo Argenta" Foreground="White" FontSize="24" HorizontalAlignment="Left" 
+               HorizontalContentAlignment="Center" FontWeight="Bold" Margin="779,235,0,326" Width="311">*Пароль</Label>
+
+        <PasswordBox Name="tbAddEmpPassword" Visibility="Hidden" FontFamily="./Fonts/#pakenham" FontWeight="Medium" Background="Transparent" BorderBrush="White"
+                 Foreground="White" FontSize="16" Margin="778,274,110,287" VerticalContentAlignment="Center"/>
+
+        <Label Name="lAddEmpRole" Visibility="Hidden" FontFamily="./Fonts/#Fulbo Argenta" Foreground="White" FontSize="24" HorizontalAlignment="Left" 
+               HorizontalContentAlignment="Center" FontWeight="Bold" Margin="779,344,0,222" Width="311">*Роль</Label>
+
+        <ComboBox Name="cbAddEmpRole" Visibility="Hidden" FontFamily="./Fonts/#Fulbo Argenta" Margin="779,384,110,177" FontSize="20"
+                  ScrollViewer.VerticalScrollBarVisibility="Visible" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+
+        <Label Name="lAddEmpGender" Visibility="Hidden" FontFamily="./Fonts/#Fulbo Argenta" Foreground="White" FontSize="24" HorizontalAlignment="Left" 
+               HorizontalContentAlignment="Center" FontWeight="Bold" Margin="288,436,0,130" Width="311">*Пол</Label>
+
+        <ComboBox Name="cbAddEmpGender" Visibility="Hidden" FontFamily="./Fonts/#Fulbo Argenta" Margin="287,475,601,79" FontSize="20"
+                  ScrollViewer.VerticalScrollBarVisibility="Visible" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+        </ComboBox>
+
+        <Label Name="lAddEmpError" Visibility="Hidden" FontFamily="./Fonts/#Fulbo Argenta" Foreground="Red" FontSize="16" HorizontalAlignment="Left" 
+               FontWeight="Bold" Margin="288,538,0,10" Width="898">Ошибка: 123</Label>
+
+        <Button Name="bAddEmpForm" Visibility="Hidden" Background="Transparent" BorderThickness="1" FontSize="20" FontFamily="./Fonts/#Fulbo Argenta"
+            Foreground="White" Margin="921,475,110,81" Style="{DynamicResource ButtonStyleWithClick}" Click="bAddEmpForm_Click">Добавить</Button>
+
+        <!-- Конец блока добавления работника -->
+
+        <!-- Начало блока редактирования работника -->
+
+        <Button Name="bEditEmp" Visibility="Hidden" Background="Transparent" BorderThickness="0" FontSize="20" FontFamily="./Fonts/#Fulbo Argenta"
+                Foreground="White" Margin="736,83,272,476" Click="bEditEmp_Click" Style="{DynamicResource ButtonStyleWithClick}">Редактирование</Button>
+
+        <ComboBox Name="cbEditEmp" Visibility="Hidden" FontFamily="./Fonts/#Fulbo Argenta" Margin="288,140,602,419" FontSize="20"
+                  SelectionChanged="cbEditEmp_SelectionChanged" ScrollViewer.VerticalScrollBarVisibility="Visible" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+        </ComboBox>
+
+        <Label Name="lEditEmpSelect" Visibility="Hidden" FontFamily="./Fonts/#Fulbo Argenta" Foreground="White" FontSize="24" HorizontalAlignment="Left" 
+               HorizontalContentAlignment="Center" FontWeight="Bold" Margin="614,140,0,420" Width="476">- выбор работника для изменения</Label>
+
+        <Label Name="lEditEmpFIO" Visibility="Hidden" FontFamily="./Fonts/#Fulbo Argenta" Foreground="White" FontSize="24" HorizontalAlignment="Left" 
+               HorizontalContentAlignment="Center" FontWeight="Bold" Margin="287,191,0,371" Width="311">*ФИО</Label>
+
+        <TextBox Name="tbEditEmpFIO" Visibility="Hidden" FontFamily="./Fonts/#pakenham" FontWeight="Medium" Background="Transparent" BorderBrush="White"
+                 Foreground="White" FontSize="16" Margin="287,235,602,326" VerticalContentAlignment="Center"/>
+
+        <Label Name="lEditEmpAge" Visibility="Hidden" FontFamily="./Fonts/#Fulbo Argenta" Foreground="White" FontSize="24" HorizontalAlignment="Left" 
+               HorizontalContentAlignment="Center" FontWeight="Bold" Margin="287,279,0,282" Width="311">*Возраст</Label>
+
+        <TextBox Name="tbEditEmpAge" Visibility="Hidden" FontFamily="./Fonts/#pakenham" FontWeight="Medium" Background="Transparent" BorderBrush="White"
+                 Foreground="White" FontSize="16" Margin="287,322,601,239" VerticalContentAlignment="Center" />
+
+        <Label Name="lEditEmpEmail" Visibility="Hidden" FontFamily="./Fonts/#Fulbo Argenta" Foreground="White" FontSize="24" HorizontalAlignment="Left" 
+               HorizontalContentAlignment="Center" FontWeight="Bold" Margin="288,367,0,199" Width="311">Email</Label>
+
+        <TextBox Name="tbEditEmpEmail" Visibility="Hidden" FontFamily="./Fonts/#pakenham" FontWeight="Medium" Background="Transparent" BorderBrush="White"
+                 Foreground="White" FontSize="16" Margin="287,403,601,158" VerticalContentAlignment="Center"/>
+
+        <Label Name="lEditEmpUsername" Visibility="Hidden" FontFamily="./Fonts/#Fulbo Argenta" Foreground="White" FontSize="24" HorizontalAlignment="Left" 
+               HorizontalContentAlignment="Center" FontWeight="Bold" Margin="780,192,0,370" Width="312">*Имя пользователя</Label>
+
+        <TextBox Name="tbEditEmpUsername" Visibility="Hidden" FontFamily="./Fonts/#pakenham" FontWeight="Medium" Background="Transparent" BorderBrush="White"
+                 Foreground="White" FontSize="16" Margin="778,235,110,326" VerticalContentAlignment="Center"/>
+
+        <Label Name="lEditEmpPassword" Visibility="Hidden" FontFamily="./Fonts/#Fulbo Argenta" Foreground="White" FontSize="24" HorizontalAlignment="Left" 
+               HorizontalContentAlignment="Center" FontWeight="Bold" Margin="781,279,0,282" Width="311">*Пароль</Label>
+
+        <PasswordBox Name="tbEditEmpPassword" Visibility="Hidden" FontFamily="./Fonts/#pakenham" FontWeight="Medium" Background="Transparent" BorderBrush="White"
+                 Foreground="White" FontSize="16" Margin="778,322,110,239" VerticalContentAlignment="Center"/>
+
+        <Label Name="lEditEmpRole" Visibility="Hidden" FontFamily="./Fonts/#Fulbo Argenta" Foreground="White" FontSize="24" HorizontalAlignment="Left" 
+               HorizontalContentAlignment="Center" FontWeight="Bold" Margin="781,367,0,199" Width="311">*Роль</Label>
+
+        <ComboBox Name="cbEditEmpRole" Visibility="Hidden" FontFamily="./Fonts/#Fulbo Argenta" Margin="781,401,108,160" FontSize="20" 
+                  ScrollViewer.VerticalScrollBarVisibility="Visible" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+
+        <Label Name="lEditEmpGender" Visibility="Hidden" FontFamily="./Fonts/#Fulbo Argenta" Foreground="White" FontSize="24" HorizontalAlignment="Left" 
+               HorizontalContentAlignment="Center" FontWeight="Bold" Margin="288,447,0,119" Width="311">*Пол</Label>
+
+        <ComboBox Name="cbEditEmpGender" Visibility="Hidden" FontFamily="./Fonts/#Fulbo Argenta" Margin="287,486,601,68" FontSize="20" 
+                  ScrollViewer.VerticalScrollBarVisibility="Visible" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+        </ComboBox>
+
+        <Label Name="lEditEmpError" Visibility="Hidden" FontFamily="./Fonts/#Fulbo Argenta" Foreground="Red" FontSize="16" HorizontalAlignment="Left" 
+               FontWeight="Bold" Margin="288,538,0,10" Width="898">Ошибка: 123</Label>
+
+        <Button Name="bEditEmpForm" Visibility="Hidden" Background="Transparent" BorderThickness="1" FontSize="20" FontFamily="./Fonts/#Fulbo Argenta"
+            Foreground="White" Margin="923,486,108,68" Style="{DynamicResource ButtonStyleWithClick}" Click="bEditEmpForm_Click">Изменить</Button>
+
+        <!-- Конец блока редактирования работника -->
+
+        <Button Name="bTasksShowIssued" Visibility="Hidden" Background="Transparent" BorderThickness="1" FontSize="18" FontFamily="./Fonts/#Fulbo Argenta"
+            Foreground="White" Margin="288,50,750,524" Style="{DynamicResource ButtonStyleWithClick}" Click="bTasksShowIssued_Click">Выдано</Button>
+
+        <Button Name="bTasksShowCheck" Visibility="Hidden" Background="Transparent" BorderThickness="1" FontSize="18" FontFamily="./Fonts/#Fulbo Argenta"
+            Foreground="White" Margin="486,50,545,524" Style="{DynamicResource ButtonStyleWithClick}" RenderTransformOrigin="0.5,0.5" Click="bTasksShowCheck_Click">На проверке
+        </Button>
+
+        <Button Name="bTasksCreate" Visibility="Hidden" Background="Transparent" BorderThickness="1" FontSize="18" FontFamily="./Fonts/#Fulbo Argenta"
+            Foreground="White" Margin="704,50,327,524" Style="{DynamicResource ButtonStyleWithClick}" RenderTransformOrigin="0.5,0.5" Click="bTasksCreate_Click" >Добавить
+        </Button>
+
+        <DockPanel Name="dpCreateTask" Margin="288,102,14,10" Visibility="Hidden">
+            <Label Name="lAddTaskTitle" Visibility="Visible" FontFamily="./Fonts/#Fulbo Argenta" Foreground="White" FontSize="24" HorizontalAlignment="Left" 
+               HorizontalContentAlignment="Center" FontWeight="Bold" Width="305" Margin="0,0,0,448">Заголовок</Label>
+
+            <TextBox Name="tbAddTaskTitle" Visibility="Visible" FontFamily="./Fonts/#pakenham" FontWeight="Medium" Background="Transparent" BorderBrush="White"
+                 Foreground="White" FontSize="18" VerticalContentAlignment="Center" Margin="-300,40,0,408" Width="303" Height="40"/>
+
+            <Label Name="lAddTaskDesc" Visibility="Visible" FontFamily="./Fonts/#Fulbo Argenta" Foreground="White" FontSize="24" HorizontalAlignment="Left" 
+               HorizontalContentAlignment="Center" FontWeight="Bold" Width="477" Margin="90,0,0,448">Описание</Label>
+
+            <TextBox Name="tbAddTaskDesc" Visibility="Visible" FontFamily="./Fonts/#pakenham" FontWeight="Medium" Background="Transparent" BorderBrush="White"
+                 Foreground="White" FontSize="18" VerticalContentAlignment="Top" Margin="-475,40,0,192" Width="477" TextWrapping="Wrap" AcceptsReturn="True"/>
+
+            <Label Name="lAddTaskDateDelivery" Visibility="Visible" FontFamily="./Fonts/#Fulbo Argenta" Foreground="White" FontSize="24" HorizontalAlignment="Left" 
+               HorizontalContentAlignment="Center" FontWeight="Bold" Width="301" Margin="-860,100,0,352">Дата сдачи</Label>
+
+            <TextBox Name="tbAddTaskDateDelivery" Visibility="Visible" FontFamily="./Fonts/#pakenham" FontWeight="Medium" Background="Transparent" BorderBrush="White"
+                 Foreground="White" FontSize="18" VerticalContentAlignment="Center" Margin="-1440,142,0,306" Width="303" Height="40"/>
+
+            <Label Name="lAddTaskDateWorker" Visibility="Visible" FontFamily="./Fonts/#Fulbo Argenta" Foreground="White" FontSize="24" HorizontalAlignment="Left" 
+               HorizontalContentAlignment="Center" FontWeight="Bold" Width="301" Margin="-860,204,0,242">Исполнитель</Label>
+
+            <ComboBox Name="cbCreateTaskWorker" Visibility="Visible" FontFamily="./Fonts/#Fulbo Argenta" FontSize="18"
+                      Margin="-1090,251,350,192" Width="303" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+
+            <Button Name="bCreateTaskForm" Visibility="Visible" Background="Transparent" BorderThickness="1" FontSize="18" FontFamily="./Fonts/#Fulbo Argenta"
+                Foreground="White" Style="{DynamicResource ButtonStyleWithClick}" RenderTransformOrigin="0.5,0.5" Width="133" Margin="-970,392,0,50" Click="bCreateTaskForm_Click" >Создать
+            </Button>
+        </DockPanel>
+
+        <Button Name="bTasksDelete" Visibility="Hidden" Background="Transparent" BorderThickness="1" FontSize="18" FontFamily="./Fonts/#Fulbo Argenta"
+            Foreground="White" Margin="923,50,108,524" Style="{DynamicResource ButtonStyleWithClick}" RenderTransformOrigin="0.5,0.5" Click="bTasksDelete_Click" >Удалить
+        </Button>
+
+        <DockPanel Name="dpDeleteTask" Margin="287,85,14,10" Visibility="Hidden">
+            <ComboBox Name="cbDeleteTask" Visibility="Visible" FontFamily="./Fonts/#Fulbo Argenta" FontSize="18"
+                      Margin="200,43,0,418" Width="501" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+
+            <Button Name="bDeleteTaskForm" Visibility="Visible" Background="Transparent" BorderThickness="1" FontSize="18" FontFamily="./Fonts/#Fulbo Argenta"
+                Foreground="White" Style="{DynamicResource ButtonStyleWithClick}" RenderTransformOrigin="0.5,0.5" Width="133" Margin="-670,392,0,50" Click="bDeleteTaskForm_Click" >Удалить
+            </Button>
+        </DockPanel>
+
+        <DockPanel Name="dpTasks" Margin="287,83,14,10" Visibility="Hidden">
+            <ScrollViewer IsTabStop="True" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <StackPanel Name="spTasks">
+
+                </StackPanel>
+            </ScrollViewer>
+        </DockPanel>
+
+        <DockPanel Name="dpTasksDetails" Margin="287,83,14,10" Visibility="Hidden">
+            <ScrollViewer IsTabStop="True" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled" Width="884">
+                <StackPanel Name="spTasksDetails">
+                    <TextBox Name="tbDetailTaskTitle" Background="Transparent" Height="50" BorderThickness="0" VerticalContentAlignment="Center"
+                             HorizontalContentAlignment="Center" FontSize="24" FontWeight="Bold" Foreground="White"
+                             IsReadOnly="True">
+                        Название задания
+                    </TextBox>
+
+                    <TextBox Name="tbDetailTaskDate" Background="Transparent" Height="40" BorderThickness="0" VerticalContentAlignment="Center"
+                             HorizontalContentAlignment="Right" FontSize="20" FontWeight="DemiBold" Foreground="White"
+                             IsReadOnly="True" Width="100" HorizontalAlignment="Right" Margin="0,0,10,0">
+                        10.01.2021
+                    </TextBox>
+                    <TextBox Name="tbDetailTaskIssuer" Background="Transparent" Height="32" BorderThickness="0" VerticalContentAlignment="Center"
+                             HorizontalContentAlignment="Left" FontSize="20" FontWeight="DemiBold" Foreground="White"
+                             IsReadOnly="True" Width="500" HorizontalAlignment="Left" Margin="10,-45,10,0">
+                        Кто Выдал
+                    </TextBox>
+
+                    <TextBox Name="tbDetailTaskWorker" Background="Transparent" Height="32" BorderThickness="0" VerticalContentAlignment="Center"
+                             HorizontalContentAlignment="Left" FontSize="20" FontWeight="DemiBold" Foreground="White"
+                             IsReadOnly="True" Width="500" HorizontalAlignment="Left" Margin="10,0,10,0">
+                        Кому
+                    </TextBox>
+
+                    <TextBox Name="tbDetailTaskDescription" Background="Transparent" Height="286" BorderThickness="1" HorizontalContentAlignment="Left"
+                             FontSize="20" FontWeight="Light" Foreground="White" VerticalContentAlignment="Top"
+                             IsReadOnly="True" Width="816" Margin="0,10,0,20">
+                        Описание
+                    </TextBox>
+
+                    <Button Name="bChooseFileTask" Visibility="Visible" Background="Transparent" BorderThickness="1" FontSize="20" FontFamily="./Fonts/#Fulbo Argenta"
+                        Foreground="White" Style="{DynamicResource ButtonStyleWithClick}" Width="225" Margin="0,-10,590,0" Click="bChooseFileTask_Click">
+                        Добавить решение</Button>
+
+                    <TextBox Name="tbCommentTask" Visibility="Visible" FontFamily="./Fonts/#pakenham" FontWeight="Medium" Background="Transparent" BorderBrush="White"
+                        Foreground="White" FontSize="16" Margin="300,-30,20,-20" VerticalContentAlignment="Center" Text="Комментарий" Height="69"/>
+
+                    <Button Name="bFinishTask" Visibility="Visible" Background="Transparent" BorderThickness="1" FontSize="20" FontFamily="./Fonts/#Fulbo Argenta"
+                        Foreground="White" Style="{DynamicResource ButtonStyleWithClick}" Width="225" Margin="0,-10,590,0" Click="bFinishTask_Click">
+                        Сдать</Button>
+
+                </StackPanel>
+            </ScrollViewer>
+        </DockPanel>
+
+        <DockPanel Name="dpProfileDetails" Margin="287,83,14,10" Visibility="Hidden">
+            <StackPanel Name="spProfileDetails">
+                <Image Name="imageProfileDetails" Visibility="Visible" Source="./Images/male_profile.png" 
+                       Width="200" Height="200" HorizontalAlignment="Left"/>
+
+                <TextBox Name="tbProfileDetailFIO" Visibility="Visible" FontFamily="./Fonts/#pakenham" FontWeight="Bold" Background="Transparent" BorderBrush="White"
+                        Foreground="White" FontSize="24" Margin="220,-300, 20, -20" VerticalContentAlignment="Center" Text="Фамилия Имя Отчество" Height="69" 
+                        HorizontalContentAlignment="Center" IsReadOnly="True" BorderThickness="0"/>
+
+                <TextBox Name="tbProfileDetailAge" Visibility="Visible" FontFamily="./Fonts/#pakenham" FontWeight="Bold" Background="Transparent" BorderBrush="White"
+                        Foreground="White" FontSize="24" Margin="220,-300, 400, -150" VerticalContentAlignment="Center" Text="Возраст: 22" Height="48" 
+                        HorizontalContentAlignment="Center" IsReadOnly="True"/>
+
+                <TextBox Name="tbProfileDetailEmail" Visibility="Visible" FontFamily="./Fonts/#pakenham" FontWeight="Bold" Background="Transparent" BorderBrush="White"
+                        Foreground="White" FontSize="24" Margin="520,-300, 20, -150" VerticalContentAlignment="Center" Text="Email: " Height="48" 
+                        HorizontalContentAlignment="Center" IsReadOnly="True"/>
+
+                <TextBox Name="tbProfileDetailRole" Visibility="Visible" FontFamily="./Fonts/#pakenham" FontWeight="Bold" Background="Transparent" BorderBrush="White"
+                        Foreground="White" FontSize="24" Margin="220,-300, 400, -260" VerticalContentAlignment="Center" Text="Роль: Sysadmin" Height="48" 
+                        HorizontalContentAlignment="Center" IsReadOnly="True"/>
+
+                <TextBox Name="tbProfileDetailUsername" Visibility="Visible" FontFamily="./Fonts/#pakenham" FontWeight="Bold" Background="Transparent" BorderBrush="White"
+                        Foreground="White" FontSize="24" Margin="520,-300, 20, -260" VerticalContentAlignment="Center" Text="Никнейм: testuser" Height="48" 
+                        HorizontalContentAlignment="Center" IsReadOnly="True"/>
+
+                <Label Name="lProfileDetailTasks" Visibility="Visible" FontFamily="./Fonts/#Fulbo Argenta" Foreground="White" FontSize="24" HorizontalAlignment="Left" 
+               HorizontalContentAlignment="Left" FontWeight="Bold" Margin="20,7,0,555" Width="853" Height="40">Текущие задания:</Label>
+
+                <DataGrid x:Name="dgProfileDetailTasks" Visibility="Visible" Margin="20,-850,20,0" Grid.RowSpan="2" IsReadOnly="True" CanUserResizeColumns="False" 
+                  CanUserResizeRows="False" VerticalScrollBarVisibility="Visible" HeadersVisibility="Column" Height="232" HorizontalScrollBarVisibility="Auto"></DataGrid>
+            </StackPanel>
+        </DockPanel>
+
+        <DockPanel Name="dpTasksDetailsChecking" Margin="287,83,14,10" Visibility="Hidden">
+            <ScrollViewer IsTabStop="True" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled" Width="884">
+                <StackPanel Name="spTasksDetailsChecking">
+                    <TextBox Name="tbDetailTaskTitleChecking" Background="Transparent" Height="50" BorderThickness="0" VerticalContentAlignment="Center"
+                             HorizontalContentAlignment="Center" FontSize="24" FontWeight="Bold" Foreground="White"
+                             IsReadOnly="True">
+                        Название задания
+                    </TextBox>
+
+                    <TextBox Name="tbDetailTaskDateChecking" Background="Transparent" Height="40" BorderThickness="0" VerticalContentAlignment="Center"
+                             HorizontalContentAlignment="Right" FontSize="20" FontWeight="DemiBold" Foreground="White"
+                             IsReadOnly="True" Width="100" HorizontalAlignment="Right" Margin="0,0,10,0">
+                        10.01.2021
+                    </TextBox>
+                    <TextBox Name="tbDetailTaskIssuerChecking" Background="Transparent" Height="32" BorderThickness="0" VerticalContentAlignment="Center"
+                             HorizontalContentAlignment="Left" FontSize="20" FontWeight="DemiBold" Foreground="White"
+                             IsReadOnly="True" Width="500" HorizontalAlignment="Left" Margin="10,-45,10,0">
+                        Кто Выдал
+                    </TextBox>
+
+                    <TextBox Name="tbDetailTaskWorkerChecking" Background="Transparent" Height="32" BorderThickness="0" VerticalContentAlignment="Center"
+                             HorizontalContentAlignment="Left" FontSize="20" FontWeight="DemiBold" Foreground="White"
+                             IsReadOnly="True" Width="500" HorizontalAlignment="Left" Margin="10,0,10,0">
+                        Кому
+                    </TextBox>
+
+                    <TextBox Name="tbDetailTaskDescriptionChecking" Background="Transparent" Height="192" BorderThickness="1" HorizontalContentAlignment="Left"
+                             FontSize="20" FontWeight="Light" Foreground="White" VerticalContentAlignment="Top"
+                             Width="834" Margin="0,10,0,20">
+                        Описание
+                    </TextBox>
+
+                    <TextBox Name="tbCommentTaskChecking" Visibility="Visible" FontFamily="./Fonts/#pakenham" FontWeight="Medium" Background="Transparent" BorderBrush="White"
+                        Foreground="White" FontSize="16" Margin="15,-10, 15, 0" VerticalContentAlignment="Center" Text="Комментарий" Height="38" Width="834"/>
+
+                    <Button Name="bOpenFileTask" Visibility="Visible" Background="Transparent" BorderThickness="1" FontSize="20" FontFamily="./Fonts/#Fulbo Argenta"
+                        Foreground="White" Style="{DynamicResource ButtonStyleWithClick}" Width="225" Margin="0,10,610,0" Click="bOpenFileTask_Click">
+                        Открыть решение</Button>
+
+                    <Label Name="lStatusTaskChecking" Visibility="Visible" FontFamily="./Fonts/#Fulbo Argenta" Foreground="White" FontSize="18" HorizontalAlignment="Left" 
+               HorizontalContentAlignment="Center" FontWeight="Bold" Margin="25,10,300,0">Новый статус</Label>
+
+                    <ComboBox Name="cbStatusTaskChecking" Visibility="Visible" FontFamily="./Fonts/#Fulbo Argenta" FontSize="20" Margin="200,-33,350,0" 
+                              VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+
+                    <Button Name="bFinishTaskChecking" Visibility="Visible" Background="Transparent" BorderThickness="1" FontSize="20" FontFamily="./Fonts/#Fulbo Argenta"
+                        Foreground="White" Style="{DynamicResource ButtonStyleWithClick}" Width="225" Margin="-20,10,590,0" Click="bFinishTaskChecking_Click">
+                        Завершить</Button>
+
+                </StackPanel>
+            </ScrollViewer>
+        </DockPanel>
+
+
+    </Grid>
+</Window>
